@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { mock } from "node:test";
 import { z } from "zod";
-import { createHike, deleteHike } from "./queries.js";
+import { createHike, deleteHike, getAllHikes } from "./queries.js";
 
 const app = new Hono();
 app.use(logger());
@@ -18,7 +18,8 @@ const newHikeSchema = z.object({
 
 // gets all hikes
 app.get("/api/hikes", async (c) => {
-  return c.json(mockHikes);
+  const response = await getAllHikes();
+  return c.json(response);
 });
 
 // gets single hike from id
