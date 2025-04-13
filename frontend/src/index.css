@@ -1,0 +1,39 @@
+:root {
+    --color-bg: #F4F1EE;  /* Off-white background */
+    --color-surface: #DDD6CE; /* Stone/Sand for surfaces like cards or form backgrounds */
+    --color-text: #3B3A36; /* Deep Brown for text */
+    --color-muted-text: #6E6B5E; /* Warm Grey for labels and helper text */
+    --color-primary: #4B6043; /* Moss Green for main actions and buttons */
+    --color-accent: #a3c9a8; /* Sky Blue for accents like links */
+    --color-error: #B84A39; /* Clay Red for error messages */
+    --color-success: #2F5D50; /* Forest Green for success feedback */
+    --color-link: #A3C9A8; /* Sky Blue link color */
+    --color-link-hover: #4B6043; /* Moss Green on hover */
+    --color-link-active: #a3c9a8; /* Forest Green on click */
+  }
+  
+  /* Global Styles */
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    color: var(--color-link); /* Sky Blue for links */
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: var(--color-link-active); /* Forest Green on click */
+  }
+  
+  /* Other global styles like buttons or form inputs that are common can be added here */
+  

@@ -9,6 +9,7 @@ export default function NavBar() {
           gap: "1rem",
           padding: "1rem",
           borderBottom: "1px solid #ccc",
+          backgroundColor: "#4B6043",
         }}
       >
         <Link to="/">Home</Link>

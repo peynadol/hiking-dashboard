@@ -1,7 +1,10 @@
+
 .add-hike-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* This is the key part */
+    height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--color-bg); 
   }
-  
