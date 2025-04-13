@@ -27,9 +27,31 @@ export default function AddHikeForm() {
     resolver: zodResolver(schema),
   });
 
+  function transformToBackendFormat(data: FormFields) {
+    return {
+      name: data.hikeName,
+      location: data.location,
+      distance_metres: data.distance,
+      hike_date: data.hikeDate,
+      notes: data.hikeNotes,
+    };
+  }
+
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    const payload = transformToBackendFormat(data);
     try {
-      console.log(data);
+      const response = await fetch("http://localhost:3000/api/hikes", {
+        method: "post",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) {
+        const err = await response.json();
+        setError("hikeName", { message: err.message || "Submission Failed" });
+        return;
+      }
+      const result = await response.json();
+      console.log(result);
     } catch {
       setError("hikeName", {
         message: "This hike already exists",

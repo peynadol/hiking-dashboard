@@ -7,11 +7,11 @@ import { z } from "zod";
 const app = new Hono();
 app.use(logger());
 
-const hikeSchema = z.object({
-  id: z.number().int(),
+const newHikeSchema = z.object({
   name: z.string().min(1),
   distance_metres: z.number().int().positive(),
   hike_date: z.string(),
+  notes: z.string(),
 });
 
 let mockHikes = [
@@ -43,7 +43,7 @@ app.get("/api/hikes/:id", (c) => {
 app.post("/api/hikes", async (c) => {
   try {
     const newHike = await c.req.json();
-    const validateHike = hikeSchema.parse(newHike);
+    const validateHike = newHikeSchema.parse(newHike);
     mockHikes.push(validateHike);
     return c.json(validateHike, 201);
   } catch (error) {

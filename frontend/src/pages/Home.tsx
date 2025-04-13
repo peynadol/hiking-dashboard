@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 export default function Home() {
+  const [allHikes, setAllHikes] = useState([]);
   const data = [
     {
       title: "Total Distance Traveled",
@@ -17,6 +19,15 @@ export default function Home() {
       icon: "🌍", // Optional: an icon to represent the data
     },
   ];
+
+  useEffect(() => {
+    const getAllHikes = async () => {
+      const response = await fetch("http://localhost:3000/api/hikes");
+      const data = await response.json();
+      setAllHikes(data);
+    };
+    getAllHikes();
+  }, []);
 
   return (
     <>
