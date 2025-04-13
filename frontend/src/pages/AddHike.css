@@ -1,0 +1,7 @@
+.add-hike-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* This is the key part */
+  }
+  

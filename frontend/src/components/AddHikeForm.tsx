@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import "./AddHikeForm.css";
 
 const schema = z.object({
-  hikeName: z.string(),
-  location: z.string(),
+  hikeName: z.string().min(1),
+  location: z.string().min(1),
   distance: z
     .number({
       invalid_type_error: "Please enter a number",
@@ -28,7 +29,6 @@ export default function AddHikeForm() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
     } catch {
       setError("hikeName", {
@@ -39,21 +39,45 @@ export default function AddHikeForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("hikeName")} type="text" placeholder="Hike Name" />
-        <p>{errors.hikeName?.message}</p>
-        <input {...register("location")} type="text" placeholder="Location" />
-        <p>{errors.location?.message}</p>
-        <input
-          {...register("distance", { valueAsNumber: true })}
-          type="text"
-          placeholder="Distance covered"
-        />
-        <p>{errors.distance?.message}</p>
-        <input {...register("hikeDate")} type="date" />
-        <p>{errors.hikeDate?.message}</p>
-        <input {...register("hikeNotes")} type="text" />
-        <p>{errors.hikeNotes?.message}</p>
+      <form className="hike-form" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label htmlFor="hikeName">Hike name: </label>
+          <input
+            {...register("hikeName")}
+            type="text"
+            placeholder="Hike Name"
+          />
+          <p>{errors.hikeName?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="location">Location: </label>
+          <input {...register("location")} type="text" placeholder="Location" />
+          <p>{errors.location?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="distance">Distance covered (km): </label>
+          <input
+            {...register("distance", { valueAsNumber: true })}
+            type="text"
+            placeholder="Distance covered"
+          />
+          <p>{errors.distance?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="hikeDate">Date of hike: </label>
+          <input {...register("hikeDate")} type="date" />
+          <p>{errors.hikeDate?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="hikeNotes">Hike notes: </label>
+          <textarea {...register("hikeNotes")} />
+          <p>{errors.hikeNotes?.message}</p>
+        </div>
+
         <button disabled={isSubmitting} type="submit">
           {isSubmitting ? "Loading..." : "Submit"}
         </button>
