@@ -3,26 +3,18 @@ import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { mock } from "node:test";
 import { z } from "zod";
+import { createHike, deleteHike } from "./queries.js";
 
 const app = new Hono();
 app.use(logger());
 
 const newHikeSchema = z.object({
   name: z.string().min(1),
+  location: z.string(),
   distance_metres: z.number().int().positive(),
   hike_date: z.string(),
   notes: z.string(),
 });
-
-let mockHikes = [
-  {
-    id: 1,
-    name: "Snowdon",
-    distance_metres: 1000,
-    hike_date: "2024-03-21",
-  },
-  { id: 2, name: "Pen y Fan", distance_metres: 1500, hike_date: "2020-02-09" },
-];
 
 // gets all hikes
 app.get("/api/hikes", async (c) => {
@@ -44,8 +36,8 @@ app.post("/api/hikes", async (c) => {
   try {
     const newHike = await c.req.json();
     const validateHike = newHikeSchema.parse(newHike);
-    mockHikes.push(validateHike);
-    return c.json(validateHike, 201);
+    const insertedHike = await createHike(validateHike);
+    return c.json(insertedHike, 201);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return c.json({ message: error.errors }, 400);
@@ -54,9 +46,9 @@ app.post("/api/hikes", async (c) => {
   }
 });
 
-app.delete("/api/hikes/:id", (c) => {
+app.delete("/api/hikes/:id", async (c) => {
   const id = parseInt(c.req.param("id"));
-  mockHikes = mockHikes.filter((hike) => hike.id !== id);
+  await deleteHike(id);
   return c.json({ message: "hike removed" });
 });
 
