@@ -1,5 +1,4 @@
 import AddHikeForm from "../components/AddHikeForm";
-import "./AddHike.css";
 export default function AddHike() {
   return (
     <>

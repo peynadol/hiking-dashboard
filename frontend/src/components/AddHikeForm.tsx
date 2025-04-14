@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import "./AddHikeForm.css";
 
 const schema = z.object({
   hikeName: z.string().min(1),
@@ -12,6 +11,8 @@ const schema = z.object({
     })
     .positive({ message: "Distance must be greater than 0" }),
   hikeDate: z.string().date(),
+  elevationGain: z.number(),
+  duration: z.number(),
   hikeNotes: z.string(),
 });
 
@@ -33,6 +34,8 @@ export default function AddHikeForm() {
       location: data.location,
       distance_metres: data.distance,
       hike_date: data.hikeDate,
+      elevation_gain: data.elevationGain,
+      duration_minutes: data.duration,
       notes: data.hikeNotes,
     };
   }
@@ -79,7 +82,7 @@ export default function AddHikeForm() {
         </div>
 
         <div>
-          <label htmlFor="distance">Distance covered (km): </label>
+          <label htmlFor="distance">Distance covered (m): </label>
           <input
             {...register("distance", { valueAsNumber: true })}
             type="text"
@@ -92,6 +95,18 @@ export default function AddHikeForm() {
           <label htmlFor="hikeDate">Date of hike: </label>
           <input {...register("hikeDate")} type="date" />
           <p>{errors.hikeDate?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="elevationGain">Elevation gain (m): </label>
+          <input {...register("elevationGain", { valueAsNumber: true })} />
+          <p>{errors.elevationGain?.message}</p>
+        </div>
+
+        <div>
+          <label htmlFor="duration">Hike duration (minutes): </label>
+          <input {...register("duration", { valueAsNumber: true })} />
+          <p>{errors.duration?.message}</p>
         </div>
 
         <div>
