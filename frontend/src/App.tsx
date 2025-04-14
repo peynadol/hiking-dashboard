@@ -4,13 +4,11 @@ import Home from "./pages/Home";
 import AddHike from "./pages/AddHike";
 import Map from "./pages/Map";
 import Login from "./pages/Login";
-import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   return (
     <>
       <Router>
-        <CssBaseline />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

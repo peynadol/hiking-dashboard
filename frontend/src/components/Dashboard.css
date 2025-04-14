@@ -1,0 +1,116 @@
+/* Dashboard.css */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: #F5F2E9; /* Cream background */
+  }
+  
+  /* Summary Section */
+  .summary-section {
+    background-color: #F5F2E9; /* Same cream background */
+    border: 1px solid #97BC62; /* Sage border instead of gray background */
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+  
+  .section-title {
+    color: #2C5F2D; /* Forest Green */
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #97BC62; /* Sage */
+    padding-bottom: 0.5rem;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #2C5F2D; /* Forest Green */
+  }
+  
+  .stat-label {
+    color: #9C6644; /* Earth Brown */
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-value {
+    color: #2C5F2D; /* Forest Green */
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  /* Search Section */
+  .search-section {
+    margin-bottom: 2rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #B4B8AB; /* Stone Gray */
+    border-radius: 4px;
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #6A9EC1; /* Sky Blue */
+    box-shadow: 0 0 0 2px rgba(106, 158, 193, 0.2);
+  }
+  
+  .search-input::placeholder {
+    color: #B4B8AB; /* Stone Gray */
+  }
+  
+  /* Hikes Section */
+  .hikes-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hikes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .no-results {
+    grid-column: 1 / -1;
+    color: #9C6644; /* Earth Brown */
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hikes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
