@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <>
+    <div className="bg-[#F7F7F7] min-h-screen">
       <Router>
         <Navbar />
         <Routes>
@@ -17,7 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 
