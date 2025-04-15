@@ -37,3 +37,28 @@ export async function createHike(hike: {
 export async function deleteHike(id: number) {
   return await sql`DELETE FROM hikes WHERE id = ${id}`;
 }
+
+export async function updateHike(
+  id: number,
+  hike: {
+    name?: string;
+    location?: string;
+    distance_metres?: number;
+    hike_date?: string;
+    notes?: string;
+    elevation_gain?: number;
+    duration_minutes?: number;
+  }
+) {
+  try {
+    const updatedHike = await sql`
+      UPDATE hikes 
+      SET ${sql(hike)} 
+      WHERE id = ${id} 
+      RETURNING *`;
+    return updatedHike;
+  } catch (error) {
+    console.error("Error updating hike:", error);
+    throw new Error("Failed to update hike");
+  }
+}

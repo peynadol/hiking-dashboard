@@ -9,7 +9,9 @@ name TEXT NOT NULL,
 location TEXT NOT NULL,
 distance_metres INTEGER NOT NULL,
 hike_date DATE NOT NULL,
-notes TEXT
+notes TEXT,
+elevation_gain INTEGER,
+duration_mintes INTEGER
 )
 `;
 

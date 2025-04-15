@@ -1,7 +1,6 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { mock } from "node:test";
 import { z } from "zod";
 import { createHike, deleteHike, getAllHikes } from "./queries.js";
 
@@ -47,12 +46,14 @@ app.post("/api/hikes", async (c) => {
   }
 });
 
+// delete hike
 app.delete("/api/hikes/:id", async (c) => {
   const id = parseInt(c.req.param("id"));
   await deleteHike(id);
   return c.json({ message: "hike removed" });
 });
 
+// update hike
 app.patch("/api/hikes/:id", async (c) => {
   const id = parseInt(c.req.param("id"));
   try {
