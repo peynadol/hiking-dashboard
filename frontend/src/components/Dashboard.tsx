@@ -1,9 +1,15 @@
 import { useState } from "react";
 import Card from "../components/Card";
+import { Hike } from "@/hike";
 
-export default function Dashboard({ hikes }) {
+type DashboardProps = {
+  hikes: Hike[],
+  onDelete: (id: number) => void,
+}
+
+export default function Dashboard({ hikes, onDelete }: DashboardProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const totalDistance = hikes.reduce((sum, h) => sum + h.distance_metres, 0);
+  const totalDistance = hikes.reduce((sum, h: Hike) => sum + h.distance_metres, 0);
   const totalElevation = hikes.reduce(
     (sum, h) => sum + (h.elevation_gain || 0),
     0
@@ -113,7 +119,9 @@ export default function Dashboard({ hikes }) {
         <h2 className="text-2xl font-bold mb-4 text-[#2C3639]">Hikes Logged</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredHikes.length > 0 ? (
-            filteredHikes.map((hike) => <Card key={hike.id} {...hike} />)
+            filteredHikes.map((hike) => (
+              <Card onDelete={onDelete} key={hike.id} {...hike} />
+            ))
           ) : (
             <p className="col-span-full text-center py-8 text-gray-500">
               No hikes found
